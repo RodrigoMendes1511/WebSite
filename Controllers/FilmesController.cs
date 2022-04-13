@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RestSharp;
 using WebSite.Data;
 using WebSite.Models;
 
@@ -22,25 +23,21 @@ namespace WebSite.Controllers
         // GET: Filmes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Filmes.ToListAsync());
+            var client = new RestClient("https://localhost:5001/");
+            var request = new RestRequest("Filme/", Method.Get);
+            var Result = client.ExecuteAsync<List<Filmes>>(request).Result.Data;
+
+            return View(Result);
         }
 
         // GET: Filmes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var client = new RestClient("https://localhost:5001/");
+            var request = new RestRequest("Filme/" + id, Method.Get);
+            var Result = client.ExecuteAsync<List<Filmes>>(request).Result.Data;
 
-            var filmes = await _context.Filmes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (filmes == null)
-            {
-                return NotFound();
-            }
-
-            return View(filmes);
+            return View(Result);
         }
 
         // GET: Filmes/Create
