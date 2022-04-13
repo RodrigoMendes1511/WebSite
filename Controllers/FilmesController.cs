@@ -21,7 +21,7 @@ namespace WebSite.Controllers
         }
 
         // GET: Filmes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var client = new RestClient("https://localhost:5001/");
             var request = new RestRequest("Filme/", Method.Get);
@@ -31,7 +31,7 @@ namespace WebSite.Controllers
         }
 
         // GET: Filmes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             var client = new RestClient("https://localhost:5001/");
             var request = new RestRequest("Filme/" + id, Method.Get);
@@ -70,7 +70,7 @@ namespace WebSite.Controllers
         }
 
         // GET: Filmes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             var client = new RestClient("https://localhost:5001/");
             var request = new RestRequest("Filme/" + id, Method.Get);
@@ -103,7 +103,7 @@ namespace WebSite.Controllers
         }
 
         // GET: Filmes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             var client = new RestClient("https://localhost:5001/");
             var request = new RestRequest("Filme/" + id, Method.Get);
